@@ -1,0 +1,30 @@
+Variables
+
+const and let
+
+booleans
+true/ false
+
+null vs undefined
+null - 비어있음
+undefined - 메모리는 만들어지고 Variable을 인지하고 있지만 값이 없는 것
+
+arrays
+const nonsens = [1, 2, 4, "hello", false];
+nonsens.push("addsome");
+
+Objects
+const player = {
+    name: "nico",
+}
+console.log(player.name);
+console.log(player[name]);
+player.lastName = "potato"; //property를 만들 수 있다.
+
+functions
+ 
+function sayHello(nameofperson){
+    console.log("hello my name is "+ nameofperson);
+}
+
+ argument(인수)
