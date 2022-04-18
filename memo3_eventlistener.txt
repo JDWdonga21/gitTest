@@ -1,0 +1,199 @@
+<const title = document.querySelector(".hello:first-child h1");
+에서 "first-child h1"는 (여러개의 h1태그가 있다는 가정하) 가장 첫번째' h1'태그를 지목하다는 이야기인가요?
+------------------------------------------------------------------------------------------------------------
+이게 저도 헷갈렸었는데요 가장 첫 번째 h1태그가 아니라 h1 태그 중에
+자식 태그로서 첫번째인 태그는 모두 해당돼요
+
+예를 들면 hello라는 이름을 가진 가정이 순서대로 A,B,C가 있고 (쪼끔 말이 안되지만 비유를 위해.. ㅎㅎ)
+각 집마다 두명씩 자녀가 있다고 하면
+first-child(첫째) 에 해당하는 사람은 각 가정마다 한 명씩 총 3명이겠죠?
+
+만약 말씀하신 것처럼 가장 첫 번째 h1태그를 지목한다고 가정하면 A집의 첫째만 해당이 되겠지만 .hello:first-child는
+hello라는 이름(classname)을 가진 첫째를 의미하므로
+A집의 first-child,B집의 first-child,C집의 first-child 모두가 해당됩니다
+---------------------------------------------------------------\
+(div class="hello")
+(h1)Grab me 1-1!(/h1)
+(h1)Grab me 1-2!(/h1)
+(/div)
+(div class="hello")
+(h1)Grab me 2-1!(/h1)
+(h1)Grab me 2-2!(/h1)
+(/div)
+(div class="hello")
+(h1)Grab me 3-1!(/h1)
+(h1)Grab me 3-2!(/h1)
+(/div)
+
+const title = document.querySelectorAll(".hello:first-child h1");
+
+이렇게 있을때,
+1-1 / 2-1 / 3-1 태그 모두가 해당한다는 말씀이신거죠?
+>
+
+<
+function makeRandomcolor(){
+r = Math.floor(Math.random()*255+1).toString(16)
+g = Math.floor(Math.random()*255+1).toString(16)
+b = Math.floor(Math.random()*255+1).toString(16)
+rgb = r+g+b
+return rgb
+}
+
+function clickHeadTwo(){
+headerTwo.style.color='#'+makeRandomcolor();
+}
+headerTwo.addEventListener('click',clickHeadTwo);
+
+
+클릭시 랜덤으로 색이 출력되게 하는 거,, 저두 해봤습니다 ㅎ_ㅎ..코드 안 베끼고 했는데 뿌듯하네요
+>
+
+<
+* javascript가 document로 html을 불러올 수 있고 수정 추가도 가능하다*
+
+1.불러오는 함수
+querySelector/ querySelectorAll 이 유용하다.
+2.사용자의 event를 listen해서 반응
+addEventListener("event", function);
+**이때 function에 실행 하는 () 기호는 쓰지 않는다. 우리가 원하는 건
+이벤트 발생 시 함수가 실행 되는 것이기 때문에 ()를 임의로 쓰면 이벤트 발생 전에 실행됨.
+3.바꿀 수 있는 property 중 style도 있다.
+title.style.color = "blue"; 혹은
+function changeColor() {
+title.style.color = "blue";
+}
+title.addEventListener("click", changeColor); 처럼 쓸 수 있다.
+>
+
+<
+클릭할 때 랜덤하게 색깔이 바뀌게 코드를 짜봤습니다 하면 할 수록 재미있네요 항상 감사드립니다
+
+const title = document.querySelector("div h1");
+
+function handleTitleClick(){
+const ranColor = ["blue","red","green","yellow","black"];
+
+let num = Math.floor(Math.random() * ranColor.length);
+title.style.color = ranColor[num];
+}
+
+title.addEventListener("click",handleTitleClick);
+>
+
+<
+- 지금 js파일이 있기 때문에 js를 통해 html의 내용을 가져올 수 있는 거임
+- document가 html이 js파일을 load하기 때문에 존재 → 그 다음에 browser가 우리가 document에 접근할 수 있게 해줌
+- element의 내부를 보고 싶으면 console.dir()
+기본적으로 object로 표시한 element를 보여줌(전부 js object임)
+그 element 중 앞에 on이 붙은 것들은 event임
+- event: 어떤 행위를 하는 것
+모든 event는 js가 listen할 수 있음
+- eventListener : event를 listen함 → js에게 무슨 event를 listen하고 싶은 지 알려줘야 함
+- title.addEventListener("click") : 누군가가 title을 click하는 것을 listen할 거임 → 무언가를 해줘야함
+
+const title = document.querySelector("div.hello:first-child h1");
+
+function handleTitleClick(){
+title.style.color = "blue";
+}
+title.addEventListener("click",handleTitleClick);
+//click하면 handleTitleClick이라는 function이 동작하길 원함
+//그래서 handle~ 함수에 () 를 안넣은 것임
+//즉, js가 대신 실행시켜주길 바라는 것임!
+
+- function이 js에게 넘겨주고 유저가 title을 click할 경우에 js가 실행버튼을 대신 눌러주길 바라는 것임( 직접 handleTitleClick(); 이렇게 하는 것이 아니라)
+- 함수에서 () 이 두 괄호를 추가함으로써 실행버튼을 누를 수 있는 거임
+>
+
+<
+1. console,dir("title");사용해서 console에서 onproperty 가 있으면 on을 빼고 property를 event로 사용가능
+2. on이 붙은 부분들은 전부 event이다
+
+listen하고 싶은 event 찾는 방법!
+1. 구글에 찾고 싶은 element의 이름 검색하기 ex) h1 html element mdn(mozilla developer network)
+2. 그 중에서 web APIs 이 포함된 페이지 찾기 (JS 관점의 HTML heading element란 의미)
+console.dir을 통해서 element를 console에 출력시키기 console.dir(title);=> 여기서도 사용가능한 event 찾을 수 있다. property 이름 앞에 on 이 있다면 그게 바로 event listener!!!! 사용할때는 on 빼고 쓰기
+style은 CSS를 통해서 변경되어야 한다.
+>
+<
+console,dir(”title“);사용해서
+페이지에서 console에서 title >클릭후 onproperty 가 있으면
+on을 빼고 property를 event로 사용가능
+ex) mouseenter = 마우스를 올려놓았을 때 event
+mouseleave = 마우스가 타겟에서 떠낫을 때 event
+function handleMouseEnter(){
+title.innerText= “Mouse is here”;
+}
+title.addEventListener(“mouseenter” , handleMouseEnter);
+function handleMouseLeave){
+title.innerText= “Mouse is gone”;
+}
+title.addEventListener(“mouseenter” , handleMouseLeave);
+>
+<
+console.dir(title)로 console 창에서 h1의 정보(?)를 볼 수 있는데 아래로 내려가면 on~~라고 적혀있, on이 붙은 부분들은 전부 event이다. 이 event는 자바스크립트에서 들을 수(listen) 있다. 이것이 바로 EventListener다.
+
+밑을 보면 document.querySelector("div.hello:first-child h1");로 h1의 정보를 가져올 수 있다.
+
+이제 드디어 event를 추가하는데 우선 function을 만들어서 내가 저 'title을 눌렀을 경우'를 만들 수 있다.
+
+가장 중요한 점. 자바스크립트는 이벤트를 들을 수 있다!
+
+const title = document.querySelector("div.hello:first-child h1");
+
+function handleTitleClick() {
+title.style.color = "blue";
+}
+
+function handleMouseEnter() {
+title.innerText = "아ㅋ 요기 있쥐";
+}
+
+function handleMouseLeave() {
+title.innerText = "홀롤로로로로롤";
+}
+
+title.addEventListener("click", handleTitleClick);
+title.addEventListener("mouseenter", handleMouseEnter);
+title.addEventListener("mouseleave", handleMouseLeave);
+>
+<
+const title = document.querySelector(".hello:first-child h1");
+
+function handleTitleClick(){
+title.style.color = "blue";
+}
+
+function handleMouseEnter(){
+title.innerText = "mouse is here!";
+}
+
+function handleMouseLeave(){
+title.innerText = "mouse is gone!";
+}
+
+title.addEventListener("click",handleTitleClick);
+title.addEventListener("mouseenter", handleMouseEnter);
+title.addEventListener("mouseleave", handleMouseLeave);
+
+
+JS로 HTML의 element를 가져오고
+가져온 element에 eventlistener 추가
+event가 발생하면 function이 실행 !
+>
+
+<
+listen하고 싶은 event를 찾는 가장 좋은 방법은, 구글에 찾고 싶은 element의 이름, 예를들어 h1 html element mdn을 검색.
+우리는 javascript의 element를 원하니, 링크에 Web APIs라는 문장이 포함된 페이지를 찾아. 왜냐면 이건 JS관점의 HTML Heading Element란 의미야.
+너무 복잡하면 element를 console.dir로 출력해서 on~ 이라고 적혀있는걸 사용하면 됨.
+
+function handleMouseEnter() {
+title.innerText = "Mouse is here!"
+}
+function handleMouseLeave() {
+title.innerText = "Mouse is gone!"
+}
+title.addEventListener("mouseenter", handleMouseEnter);
+title.addEventListener("mouseleave", handleMouseLeave);
+>

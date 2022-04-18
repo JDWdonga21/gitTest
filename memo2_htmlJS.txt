@@ -1,0 +1,167 @@
+JS에서 html을 읽어올 수 있고 수정할 수 있다.
+웹사이트도 하나의 오브젝트이다.
+document 는 나의 웹사이트
+document.title
+
+<console에 document를 입력하면, 작성한 HTML을 가져올 수 있어.
+document는 브라우저에 존재하는 object
+console에 console.dir(document)를 호출해 보면, document.title이 HTML에서 정의한 title이랑 같다.
+JS에서 HTML document 객체로 부터 title을 가져올 수 있다.
+JS는 HTML에 접근하고 읽을 수 있게 설정되어 있어.
+js를 통해 html를 바꿀 수도 있다. document.title = "HO";
+모든 것들은 document로부터 시작해. web site를 의미하기 때문.
+document.body를 호출하면 body항목만 가지고 온다.>
+
+<210629. 12:10
+
+console에서 document.title = "hi" 코드 한줄을 직접 작성한 후, 웹사이트의 title이 바뀌는 걸 보고 놀라서 입틀막을 하였다.
+
+
+
+*혹시나 console.dir(document)와 console.log(document)의 차이가 헷갈리신다면 제가 찾아본 사이트를 참고하시면 좋을 것 같습니다.
+
+https://jongbeom-dev.tistory.com/115
+>
+
+document.getElementByID("title");
+
+<
+1. document 라는 객체는 JS에서 HTML파일을 불러올 수 있도록 도와준다
+2. document의 함수 중에는 getElementById 라는 함수가 있는데, 이 함수가 HTML에서 id를 통해 element를 찾아준다
+ex)document.getElementedById("idname")
+
+document
+- HTML과 상호작용을 가능하게 해주고 브라우저에서도 그냥 사용이 가능한 object이다.
+- document의 getElementByID 라는 함수는 HTML에서 ID를 통해 element를 찾아준다.
+-ex) const title = document.getElementByID('id이름')
+
+일단 element를 찾고 나면, 이것저것 할 수 있다.
+- ex) title.innerText - 'Got You!' (id = 'title' 인 element의 inneText 바꾸기)
+- ex) console.log(title.id)
+- ex) console.log(title.className) (id와 class 가져오기)
+
+
+브라우저에서 제공하는 객체(object) 중 document라는 객체는
+JS에서 HTML파일을 불러올 수 있도록 도와준다.
+document라는 객체 안에 getElementById 라는 함수가 있는데
+이 함수의 기능은 해당 HTML의 고유 ID를 추적하여 해당 HTML파일을 찾은뒤에
+JS가 해당 ID를 가진 HTML 파일을 보완 수정할 수 있도록 해준다.
+
+>
+<
+document.getElementById(“title”)
+은 html에 있는 id를 불러올 수 있다.
+
+js에서는 html이 표현하는 object를 보여준다
+
+title.innerText = “got you”
+처럼 js에서 바꾸기 쌉가능 id를 추가했기에 가능.
+
+모든 것들을 html에서 항목들을 가지고와서 js에서 변경한다
+console.dir(“title”);
+js에서는 html이 표현하는 object를 보여준다
+
+title.innerText = “got you”
+처럼 js에서 바꾸기 쌉가능 id를 추가했기에 가능.
+
+모든 것들을 html에서 항목들을 가지고와서 js에서 변경한다
+
+
+브라우저에서 그냥 사용할 수 있는 'document'라는 object를 배웠다 !
+document의 함수 중에는 getElementById 라는 함수가 있는데,
+이 함수가 HTML에서 id를 통해 element를 찾아준다.
+element를 찾고 나면, JS로 해당 HTML의 무엇이든 바꿀 수 있다.
+ex. element의 innerText를 바꾼다던가 (title.innerText = "Got you!";)
+id, className 등을 가져 올 수 있음. (cosole.log(title.id);)
+>
+
+----------------------- - ---------------------------------------------------------
+<
+1. getElementsByClassName() : 많은 element를 가져올때 씀(array를 반환)
+2. querySelector : element를 CSS selector방식으로 검색할 수 있음, 하나의 element, 첫번째 있는 element를 가져옴
+3. querySelectorAll : element를 array로 반환, 여러개 한번에 가져올 수 있음, 하나만 지정해도 array로 반환
+>
+
+<
+해당 element를 js로 가져오는 방법은
+document.
+1. id로 가져오는것 getElementById
+2. 태그명으로 가져오는것 getElementByTagname
+3. class명으로 가져오는것 getElementByClassName
+4. querySelector로 가져오는것 : 해당 방법의 장점은 css처럼 가져올수 있다는 것이다 cool!!!
+＃querySelector의 유의사항
+조건에 부합하는 여러개의 element가 있더라고 항상 첫번째 element를 출력한다.
+ㄴ이를 해결하고 싶으면 querySelectorAll을 쓸것!
+>
+
+<
+getElementById()
+getElementsByClassName()
+getElementsByTagName()
+이렇게 자바스크립트를 통해 HTML을 가져올 수 있는 것이 크게 세가지 있음
+이중에서 querySelector를 가장 많이 쓸 것임
+
+getElementById() : 말 그대로 id , 하나의 값을 반환해줄때 쓴다
+getElementsByClassName() : 클래스 네임을 가져옴, array에 할당
+getElementsByTagName(): name할당 가능 array에 할당
+
+하지만 가장 많이 쓸 것은
+
+querySelector! 왜 ? css 셀렉터처럼 사용할 수 있기때문에
+매우 간편하고 유용함
+게다가 class, id전부 사용가능함 class id를 앞에 쓰고
+거기에 해당하는 태그들을 쓰면 해당 클래스/id 특정 태그들만 가져오기 가능
+
+but 만약에 동일한 class가 있다면 전부다 가져오는게 아니라
+첫번째 element만 return함
+
+동일한 조건에 있는 것들을 싹다 선택해서 가져오고 싶다면
+querySelectorAll를 쓰면 됨
+말 그대로 해당되는 것 전부다 가져옴 (물론 array 형태로)
+>
+
+<
+원하는 값을 불러오는 방법에는 여러가지 있다.
+
+getElementById >> 하나의 값
+getElementsByClassName >> 배열
+getElementsByTagName . . . >> 배열
+
+위에서 id 빼고는 배열을 가져오기 때문에 title.innerText 와 같은 방법은 사용할 수 없다.
+또
+Grab me3
+처럼 Id를 가진 태그의 하위 태그를 선택하고 싶을 때 위의 방법으로는 한계가 있다.
+이때 사용하는 게 querySelector/querySelectorAll
+
+const title = document.querySelector(".hellos h1"); 와 같이 쓰면
+.hellos h1 마치 css 선택자 처럼 원하는 요소를 선택 가능
+console.log((title.innerText = "히힛")); 화면에 글자가 히힛으로 바뀐다
+
+** 단 hello라는 class를 가진 h1태그가 여러개인 경우 querySelectorAll을 써야 한다.
+선택자가 id인 경우엔 #hello
+만약 요소를 특정하지 않고 선택자만 쓰는 경우
+>> const title = document.querySelector(".hellos");
+
+
+Grab me3
+
+hello
+
+라고 써도 grab me3와 hello 모두 선택됨
+그리고 여기서 만약 업데이트를 하면
+>>console.log((title.innerText = "히힛"));
+>> 결과는 grab me3, hello 둘 다 사라지고 히힛으로 대체된다.
+>
+
+<
+- getElementsByClassName() : 많은 element를 가져올때 씀(array를 반환)
+- getElementsByTagName() : name을 할당할 수 있음(array를 반환)
+- querySelector : element를 CSS selector방식으로 검색할 수 있음 (ex. h1:first-child)
+단 하나의 element를 return해줌
+⇒ hello란 class 내부에 있는 h1을 가지고 올 수 있다(id도 가능함)
+- 첫번째 element만 가져옴
+- 조건에 맞는 세개 다 가져오고 싶으면 querySelectorAll
+⇒ 세개의 h1이 들어있는 array를 가져다 줌
+- querySelector("#hello); 와 getElementById("hello"); 는 같은 일을 하는 것임
+하지만 후자는 하위요소 가져오는 것을 못하므로 전자만 쓸거다
+>

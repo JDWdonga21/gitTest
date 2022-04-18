@@ -1,0 +1,103 @@
+document의 head,title,body 는 중요하기 때문에
+document.body.style~ 은 허용되고
+h1이나 div 같은 것들은 호출이 안되서
+querySelcetor나 getElementByID로 호출해야 한다
+
+<아래처럼 적었는데 wifi를 껐다 켜도 반응이 없네요.. 노트북이라 그런가요?
+I wrote it as below, but it doesn't work. Because it's a notebook(computer)?
+(I used chrome web)
+
+function handleWindowOffline() {
+alert('SOS No WIFI');
+console.log('NO WIFI')
+}
+
+function handleWindowOnline() {
+alert('ALL GOOD')
+console.log('GOOD WIFI')
+}
+window.addEventListener("offline", handleWindowOffline);
+window.addEventListener("online", handleWindowOnline);>
+<
+저도 자세하게 이 코드를 실제로 써본적은 없고 그냥 보기만 했었는데요. 제 브라우저에서도 동일하게 작동이 되지 않았습니다. 따라서 구글링 하던 도중에 브라우저 자체 설정에서 네트워크를 끊어버려서 그걸로 확인해봤는데 되었어요.
+
+방법) f12 (개발자도구) -> Network -> No throttling 이라고 써있는 부분을 클릭하면 쭉 목록이 나오면서 offline이 있습니다. 그걸 누르면 현재 브라우저 자체에서 네트워크가 offline으로 설정되어 와이파이 끊겼을 시 코드가 작동되는 것을 볼 수 있습니다.
+그리고 다시 기본 설정이었던 no throttling 을 클릭하면 와이파이 연결 시 코드가 작동되는 것을 볼 수 있습니다.
+
+참고로 브라우저 문제인가 해서 브레이브나 파이어폭스 다운받아서 해봤는데 의미 없더군요. 이게 브라우저 자체가 네트워크 연결 설정을 인지하는 것이 중요한 듯 싶어요. 저는 윈도우 사용자입니다.
+
+
+>
+
+<
+
+title.onclick = handleMouseEnter;
+title.addEventListener(“mouseenter” , handleMouseEnter);
+
+위에 두 코드는 동일하나 addEventListener를 선호하는 이유는
+removeEventListener을 통해서 event listener을 제거할수있기 때문이다.
+
+document에서 body,head,title 은 중요해서 언제든
+ex) document.body 로 가져올수있지만
+div나 h1 등 element 들은 querySelector getElementById등으로 찾아야한다.
+ex) document.querySelector(“h1”);
+
+window는 기본제공
+function handleWindowResize(){
+document.body.style.backgroundColor = “tomato”;
+}
+function handleWindowCopy(){
+alert(“copier”);
+}
+
+window.addEventListener(“resize”, handleWindowResize);
+window.addEventListener(“copy”, handleWindowCopy);
+
+>
+
+<
+document의 body,head,title 이런것들은 중요하기 때문에
+document.body.style~의 명령이 허용되지만, div같은것들은 호출이 안됨
+
+나머지 element들은 querySelector나 getElementById로 불러와야됨!!!!!!!
+>
+
+<
+addEventListner() 로 이벤트를 리슨할 수 있고
+oneventname property 로도 할당 가능
+
+title.onclick = function() { // }
+
+addEventListner() 로 처리할 경우 removeEventListner()로 제거 가능
+
+window 를 이용할 경우 element에 접근 불가
+document로 가져와야함
+
+document.body.style.backgroundColor = "tomato";
+이건 html의 body 그 자체를 의미
+
+큰 흐름은 element를 가져와 이벤트를 적용시키기
+>
+
+<
+event를 사용하는 데에 두가지 방법이 있어. 첫번째는 title.addEventListener()를 해주고 "click"를 넘겨주는거야.
+하지만 이걸 title.onclick으로 바꿀 수 있어. title.onclick=handleTitleClick;
+addEventListener()를 더 선호하는 이유는 나중에 removeEventListener을 통해 event listener을 제거할 수 있기 때문.
+
+window의 interface 또는 object
+document가 JS에서 기본적으로 제공되듯 Window도 기본적으로 제공 돼.
+function handleWindowResize(){
+document.body.style.backgroundColor="tomato";
+}
+function handleWindowCopy() {
+alert("copier!");
+}
+window.addEventListener("resize", handleWindowResize);
+window.addEventListener("copy", handleWindowCopy);
+
+document의 body, head, title 이런것들은 중요하기 때문에 존재하고, 나머지 element들은 querySelector이나 getElementById등으로 찾아야 해.
+
+wifi에 연결되어 있는지 브라우저가 알 수 있다.
+window.addEventListener("offline", handleWindowOffline);
+window.addEventListener("online", handleWindowOnline);
+>
