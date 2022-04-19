@@ -1,0 +1,136 @@
+----------------- .js 에서 style 컨트롤 -----------------------
+const h1 = document.querySelector("div.hello:nth-child(4) h1:last-child");
+
+//const h1 = document.querySelector("div.hello:last-child h1");
+
+console.log(h1);
+
+function handleTitleClick() {
+  const currentColor = h1.style.color;
+  let newColor;
+  if (currentColor === "blue") {
+    newColor = "red";
+  } else {
+    newColor = "blue";
+  }
+  h1.style.color = newColor;
+  }
+
+h1.style.color = "blue";
+h1.addEventListener("click", handleTitleClick);
+----------------- .js 에서 style 컨트롤 -----------------------
+변수 2가지에 대해 헷갈려하시는 것에 대한 제 의견을 말씀드려보도록 하겠습니다.
+1. currentColor는 getter로써, 최근 color값을 복사하는 역할을 합니다. 그렇기에 의미론적으로 봤을 때 const로 선언하는 것이 적절합니다.
+2. newColor는 setter로써, 변수에 대입된 색상값을 h1.style.color에 최종적으로 할당하는 역할을 합니다. 그리고 이것도 의미론적으로 봤을 때 값이 변경될 수 있다는 것을 염두에 두기 위해 let으로 선언하는 것이 적절합니다.
+3. 다들 아시겠지만 프로그래밍언어에서 "="(equal) 표시는 오른쪽에 있는 값을 왼쪽에 대입한다는 뜻입니다. 이를 염두에 두시면 코드를 이해하는데 편하실 것 같습니다.
+4. (참고) 함수 내에서 선언된 변수는 함수 밖에서는 존재하지 않습니다. 그렇기 때문에 const currentColor로 변수 선언을 하더라도, 함수가 호출될 때 마다 새로운 값을 받을 수 있습니다.
+
+이를 토대로 코드를 순차적으로 이해하면,
+
+1) click event 발생 및 함수 실행
+2) currentColor 변수 선언 후 h1.style.color 값 복사 (getter)
+3) newColor 변수 선언
+4) currentColor 현재 값 확인
+5) 조건에 따라 newColor에 "tomato" or "blue" 값 대입
+6) 마지막으로 h1.style.color에 newColor값 대입 (setter)
+-----------------------------------------------------------
+막줄의 의미를 잘 모르시는 분들이 계셔서 도움이 되려나 싶지만 써봅니다...
+
+이걸 컴퓨터 입장에서 생각해보면 이해가 좀 더 편합니다.
+우리는 현재상태의색깔 값을 currentColor라는 이름의 변수에 저장해주고, 클릭했을 때 바뀌게 될 새로운 색깔값을 newColor라는 이름의 변수에 저장해줄거고 이걸로 글자색(h1.style.color)을 바꿔줄거죠? (const currentColor = h1.style.color; 라고 했다고 이제부터 현재상태의색깔은 h1.style.color다! 이게 아닙니다.)
+여기서 컴퓨터는 newColor가 무슨용도인지 모르고 그냥 이름으로써 알고있는겁니다.
+다시 코드로 돌아가보면 어쨋든 지금 currentColor에 h1.style.color로 현재데이터를 넣어줬으니 조건문을 통과하면서 비어있던(undefined상태) 변수newColor에는 tomato가 들어가게됩니다.
+근데 여기까지만으로는 컴퓨터가 이게 글자색을 바꾸라는 뜻인지를 모릅니다. 사람은 변수이름 지을 때 이미 의도를 갖고있었기 때문에 자연스럽게 알고있겠지만 컴퓨터는 newColor라는 변수에 tomato를 넣긴 했는데 뭐 어쩌라는건지 모르고있다는거죠. (newColor에 데이터만 들어가고 끝! 인 상태)
+그래서 반복문이 끝나는 바로 다음 줄에 h1.style.color = newColor;를 써줌으로써 글자색을 바꾸도록 해주어야합니다.
+
+
+-------------------style 파일로 뺌 ---------------------------------------------
+.js
+const h11 = document.querySelector("div.hello:nth-child(4) h1:last-child");
+
+//const h1 = document.querySelector("div.hello:last-child h1");
+
+console.log(h11);
+
+function handleTitleClick() {
+  const clickedClass = "active";
+  if (h11.className === clickedClass) {
+    h11.className = "";
+  } else {
+    h11.className = clickedClass;
+  }
+}
+
+h11.addEventListener("click", handleTitleClick);
+
+.css
+body {
+  background-color: beige;
+}
+h1 {
+  color: cornflowerblue;
+  transition: color 0.5s ease-in-out;
+}
+.active {
+  color: tomato;
+}
+
+----------------------------------------------------------------------
+style에 적합한 도구는 CSS
+animation에 적합한 도구는 JS
+css파일에
+h1 {
+color: cornflowerblue;
+}
+.clicked {
+color: tomato;
+}
+를 적고
+js에서는 h1에 active class를 전달하는거다.
+const h1 = document.querySelector("div.hello:first-child h1");
+function handleTitleClick() {
+if(h1.className === "clicked") {
+h1.className = "";
+} else {
+h1.className = "clicked";
+}
+}
+h1.addEventListener("click", handleTitleClick);
+여기서 JS는 HTML을 변경할거고, CSS는 HTML을 바라보고 style을 변경한다.
+근데 조금 문제가 있는 active는 우리가 지어준 이름이다. raw value라고 하는데, 이름을 바꾸다가 에러가 발생할 수도 있다. const로 지정해라.
+function handleTitleClick() {
+const clickedClass = "clicked";
+if(h1.className === clickedClass) {
+h1.className = "";
+} else {
+h1.className = clickedClass;
+}
+}
+이렇게 작성하면 에러가 발생할 수 있는 부분을 축소한다.
+
+그런데, html의 h1에 sexy-font라는 class name이 있었는데 js를 실행하니 교체되었다.
+최초의 class name이 사라졌고.., sexy-font라는 class name을 간직하고 싶은데 이건 어떻게 해야하는가.
+const clickedClass = "clicked sexy-font";에 추가하면 되긴 하는데 좋은 방법은 아니다. class를 추가할 때마다 js랑 css에서 업데이트를 계속 해야하니까.
+우리가 해야하는건 js로 모든 class name을 변경하지 않는거다. 이 sexy-font를 삭제하지 않고 clicked class를 변경하고 싶다는거지. 다음영상에서.
+
+----------------------------------------------------------------------------------------
+const h11 = document.querySelector("div.hello:nth-child(4) h1:last-child");
+
+//const h1 = document.querySelector("div.hello:last-child h1");
+
+console.log(h11);
+
+function handleTitleClick() {
+  //const clickedClass = "active";
+  // if (h11.classList.contains(clickedClass)) {
+  //   h11.classList.remove(clickedClass);
+  // } else {
+  //   h11.classList.add(clickedClass);
+  // }
+  // 위 코드 한번에 하는 함수
+  h11.classList.toggle("active");
+}
+
+h11.addEventListener("click", handleTitleClick);
+
+

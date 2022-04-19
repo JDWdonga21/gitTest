@@ -1,66 +1,78 @@
-const title = document.getElementById("title");
-title.innerText = "Got you!";
+// const title = document.getElementById("title");
+// title.innerText = "Got you!";
 
-console.log(title.id);
-console.log(title.className);
+// console.log(title.id);
+// console.log(title.className);
 
-//id가 없는 경우 엘리먼트를 어떻게 찾을까?
-const hellos = document.getElementsByClassName("hello");
-console.log(hellos);
+// //id가 없는 경우 엘리먼트를 어떻게 찾을까?
+// const hellos = document.getElementsByClassName("hello");
+// console.log(hellos);
 
-const titletag = document.getElementsByTagName("h1");
-console.log(titletag);
+// const titletag = document.getElementsByTagName("h1");
+// console.log(titletag);
 
 //이게 좋다 CSS셀렉터를 이용해서 검색
-const title3 = document.querySelector(".hello h1");
-console.log(title3);
+const h11 = document.querySelector("div.hello:nth-child(4) h1:first-child");
+
+//const h11 = document.querySelector("div.hello:last h1:first-child");
+//const h11 = document.querySelector("div.hello:last-of-type h1:first-child");
+//const h11 = document.querySelector("div.hello:nth-of-type(3) h1:first-child");
+//const h11 = document.querySelectorAll("div.hello:last-child");
+//const h1 = document.querySelector("div.hello:last-child h1");
+console.log(h11);
 
 function handleTitleClick() {
-  console.log("clicked!!!");
-  title3.style.color = "red";
+  //const clickedClass = "active";
+  // if (h11.classList.contains(clickedClass)) {
+  //   h11.classList.remove(clickedClass);
+  // } else {
+  //   h11.classList.add(clickedClass);
+  // }
+  // 위 코드 한번에 하는 함수
+  h11.classList.toggle("active");
 }
 
-function handleMouseEnter() {
-  //console.log("mouse is here!");
-  title3.innerText = "mouse is here!";
-}
+h11.addEventListener("click", handleTitleClick);
 
-function handleMouseLeave() {
-  //console.log("mouse is out!");
-  title3.innerText = "mouse is out!";
-}
+// function handleMouseEnter() {
+//   //console.log("mouse is here!");
+//   title3.innerText = "mouse is here!";
+// }
 
-function handleWindowResize() {
-  document.body.style.backgroundColor = "tomato";
-}
+// function handleMouseLeave() {
+//   //console.log("mouse is out!");
+//   title3.innerText = "mouse is out!";
+// }
 
-function handleWindowCopy() {
-  alert("도둑이야!!!");
-}
+// function handleWindowResize() {
+//   document.body.style.backgroundColor = "tomato";
+// }
 
-function handleWindowOffline() {
-  alert("SOS no WIFI");
-}
+// function handleWindowCopy() {
+//   alert("도둑이야!!!");
+// }
 
-function handleWindowOnline() {
-  alert("good WIFI");
-}
+// function handleWindowOffline() {
+//   alert("SOS no WIFI");
+// }
 
-title3.style.color = "blue";
-//title3.addEventListener("click", handleTitleClick);
-title3.addEventListener("mouseenter", handleMouseEnter);
-title3.addEventListener("mouseleave", handleMouseLeave);
+// function handleWindowOnline() {
+//   alert("good WIFI");
+// }
+
+// title3.addEventListener("mouseenter", handleMouseEnter);
+// title3.addEventListener("mouseleave", handleMouseLeave);
 
 //이것도 된다.
-title3.onclick = handleTitleClick;
+//title3.onclick = handleTitleClick;
 
-window.addEventListener("resize", handleWindowResize);
-window.addEventListener("copy", handleWindowCopy);
-window.addEventListener("offline", handleWindowOffline);
-window.addEventListener("online", handleWindowOnline);
+// window.addEventListener("resize", handleWindowResize);
+// window.addEventListener("copy", handleWindowCopy);
+// window.addEventListener("offline", handleWindowOffline);
+// window.addEventListener("online", handleWindowOnline);
 
-const title4 = document.querySelectorAll(".hello h1");
-console.log(title4);
+// const title4 = document.querySelectorAll(".hello h1");
+// console.log(title4);
 
 //JS 는 event
 
