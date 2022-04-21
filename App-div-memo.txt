@@ -71,3 +71,32 @@ btn.addEventListener("click, (event) => fn(1,2,3))
 2. "Hello" + username; === `Hello ${username}`;
 3. 여기서 중요한건 2번째 방법은 따옴표가 아닌 `안에 넣어 주여야함
 >
+
+<
+1. localStorage 브라우저에 무언가를 저장한 후 나중에 가져 올 수 있음.
+ex)lcoalStorage.setItem("username", "nico");
+lcoalStorage.getItem("username")
+lcoalStorage.removeItem("username")
+>
+
+<
+const username=loginInput.value;
+라는 문장은 인풋값에 대한 변수를 저장하는것 같은데 굳이 onLoginSubmit 라는 function 안에서 정의 하는지 이해가 안가요 nico~~~
+
+그리고 그변수를 함수밖에서 정의할경우에 에러가 생기더라고요
+
+
+이벤트 리스너 처리때문에 그래요. 저희가 최종으로 목표하는 것은 인풋에 텍스트를 입력하고 submit 버튼을 클릭했을 때 그에 대한 값이 local storage에 저장되어 그것을 보는 것인데, 만약 loginInput.value를 onLoginSubmit 함수 내부가 아닌 외부에서 선언하면 local storage에 저장을 못해요.
+
+말씀하신대로 생각해보면 함수 외부에서 즉 전역변수로 username 변수를 선언하면 단순히 선언한 것 그것 뿐입니다.
+submit 버튼을 클릭해야 내용이 전달되어 저장될 수 있는데 그냥 말 그대로 선언한 것 그뿐 그 이상도 이하도 아니에요.
+
+username을 함수 밖에 선언하게 되면 submit 하기 전에 input에 있는 value가 username에 저장되게 됩니다.
+현재 input의 value는 아무 값도 없기 때문에 username에는 빈 값이 저장되죠.
+따라서 submit 할 때 username에 loginInput.value를 저장해줘야 우리가 입력한 값이 저장되게 됩니다!
+
+그러네요 const는 다른 변수값을 할당 못받으니.
+onLoginSubmit 안의 함수가 아니라 전역 변수 submit하기 전에 선언을 해버리면 input의 value 값이 '' 으로 저장이 되버리네요 당연하게 생각 했던것을 다시 말로 풀어 사용할려니 순간 뇌정지가 왔습니다 감사합니다.
+
+
+>
